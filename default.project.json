@@ -4,26 +4,27 @@
     "$className": "DataModel",
 
     "ReplicatedStorage": {
-      "Common": {
-        "$path": "src/shared"
-      }
+      "$className": "ReplicatedStorage",
+      "$path": "src/shared"
     },
 
     "ServerScriptService": {
-      "Server": {
-        "$path": "src/server"
-      }
+      "$className": "ServerScriptService",
+      "$path": "src/server"
     },
 
     "StarterPlayer": {
+      "$className": "StarterPlayer",
       "StarterPlayerScripts": {
-        "Client": {
-          "$path": "src/client"
-        }
+        "$className": "StarterPlayerScripts",
+        "$path": "src/client"
       }
     },
 
     "Workspace": {
+      "$className": "Workspace",
+      "$path": "src/workspace",
+      "$ignoreUnknownInstances": true,
       "$properties": {
         "FilteringEnabled": true
       },
@@ -48,24 +49,6 @@
             512
           ]
         }
-      }
-    },
-    "Lighting": {
-      "$properties": {
-        "Ambient": [
-          0,
-          0,
-          0
-        ],
-        "Brightness": 2,
-        "GlobalShadows": true,
-        "Outlines": false,
-        "Technology": "Voxel"
-      }
-    },
-    "SoundService": {
-      "$properties": {
-        "RespectFilteringEnabled": true
       }
     }
   }
