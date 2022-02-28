@@ -1,6 +1,9 @@
 local module = {
 
     kill = {
+        Aliases = {
+            "kill",
+        },
         function (params)
             local players = game.Players:GetPlayers()
             for _,p in pairs(params[1]) do
@@ -12,17 +15,26 @@ local module = {
         end
     },
     re = {
+        Aliases = {
+            "re",
+            "respawn"
+        },
         function (params)
             local players = game.Players:GetPlayers()
-            for _,p in pairs(params[1]) do
+            for _,p in pairs(params) do
                 local finded = table.find(players, p)
                 if finded then
                     finded:LoadCharacter()
                 end
             end
         end
+        
     },
     team = {
+        Aliases = {
+            "team",
+            "t"
+        },
         function (params)
             local players = game.Players:GetPlayers()
             for _,p in pairs(params[1]) do
@@ -34,13 +46,27 @@ local module = {
         end
     },
     rteam = {
+        Aliases = {
+            "rteam",
+            "randomteam",
+            "randomizeteams"
+        },
         function (params)
-            for _,p in pairs(params[1])do
-                local teams = params[2]
-                local player = game.Players:FindFirstChild(p)
+            local players = game.Players:GetPlayers()
+            local teams = game.Teams:GetTeams()
+
+            local team = params[2]
+            local i = 1
+            for _,p in pairs(params[1]) do
+                local player = table.find(players, p)
                 if player ~= nil then
-                    local i = math.random(1, #teams)
-                    player.Team = game.teams:FindFirstChild(teams[i])
+                    if i <= #params[2] then
+                        player.Team = table.find(teams, teams[i])
+                        i += 1
+                    else
+                        player.Team = table.find(teams, team[1])
+                        i = 1
+                    end
                 end
             end
         end

@@ -11,17 +11,25 @@ local function CommandChecker(player, message)
             local commando = message[1]
             table.remove(message, 1)
             local parameters = {}
+
             for _,n in pairs(message) do 
                 local parameter = string.split(n, ",")
                 table.insert(parameters, parameter)
             end
+
             local m,c = string.gsub(commando, ";", "")
             local command = string.split(m, " ")
+            
             if c == 1  then
-                local execute = commands[command[1]]
-                if execute ~= nil then
-                    execute[1](parameters)
-                end 
+                for _,p in pairs(commands) do
+                    local aliases = table.find(p.Aliases, m)
+                    if aliases ~= nil then
+                        command = p
+                        break
+                    end
+                end
+                local execute = command[1]
+                execute(parameters)
             end
         end
     end
