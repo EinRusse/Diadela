@@ -5,9 +5,8 @@ local module = {
             "kill",
         },
         function (params)
-            local players = game.Players:GetPlayers()
             for _,p in pairs(params[1]) do
-                local play = table.find(players, p)
+                local play = game.Players:FindFirstChild(p)
                 if play then
                     play.Character.Humanoid.Health = 0
                 end
@@ -20,9 +19,8 @@ local module = {
             "respawn"
         },
         function (params)
-            local players = game.Players:GetPlayers()
-            for _,p in pairs(params) do
-                local finded = table.find(players, p)
+            for _,p in pairs(params[1]) do
+                local finded = game.Players:FindFirstChild(p)
                 if finded then
                     finded:LoadCharacter()
                 end
@@ -36,9 +34,8 @@ local module = {
             "t"
         },
         function (params)
-            local players = game.Players:GetPlayers()
             for _,p in pairs(params[1]) do
-                local player = table.find(players, p)
+                local player = game.Players:FindFirstChild(p)
                 if player ~= nil then
                     player.Team = params[2]
                 end
@@ -52,13 +49,12 @@ local module = {
             "randomizeteams"
         },
         function (params)
-            local players = game.Players:GetPlayers()
             local teams = game.Teams:GetTeams()
 
             local team = params[2]
             local i = 1
             for _,p in pairs(params[1]) do
-                local player = table.find(players, p)
+                local player = game.Players:FindFirstChild(p)
                 if player ~= nil then
                     if i <= #params[2] then
                         player.Team = table.find(teams, teams[i])
