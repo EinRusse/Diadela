@@ -2,9 +2,10 @@ local module = {
 
     kill = {
         function (params)
+            local players = game.Players:GetPlayers()
             for _,p in pairs(params[1]) do
-                local play = game.Players:FindFirstChild(p)
-                if play ~= nil then
+                local play = table.find(players, p)
+                if play then
                     play.Character.Humanoid.Health = 0
                 end
             end
@@ -12,18 +13,20 @@ local module = {
     },
     re = {
         function (params)
+            local players = game.Players:GetPlayers()
             for _,p in pairs(params[1]) do
-                local play = game.Players:FindFirstChild(p)
-                if play ~= nil then
-                    play:LoadCharacter()
+                local finded = table.find(players, p)
+                if finded then
+                    finded:LoadCharacter()
                 end
             end
         end
     },
     team = {
         function (params)
+            local players = game.Players:GetPlayers()
             for _,p in pairs(params[1]) do
-                local player = game.Players:FindFirstChild(p)
+                local player = table.find(players, p)
                 if player ~= nil then
                     player.Team = params[2]
                 end
