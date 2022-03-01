@@ -8,6 +8,9 @@ local module = {
     Mods = {
         --Here you will put the players that you want to give Mod.
         "Player2"
+    },
+    BanList = {
+        --Here is the list of banned players in your place.
     }
 }
 
