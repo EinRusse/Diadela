@@ -166,7 +166,38 @@ local module = {
                 end
             end
         end
-    }
+    },
+   give = {
+     Aliases = {
+       "give",
+       "gib"
+     }
+     function(params, _, level)
+      if level >= 10 then
+        if params[1] == "all" then
+          for _,p in pairs(game.Players:GetPlayers)
+           for _,o in pairs(params[2]) do
+             o:Clone().Parent = p
+          end
+        else
+         local tools: table = {}
+         for _,p in pairs(params[2]) do
+          local tool = game.ServerStorage:FindFirstChild(p)
+          if tool then
+            table.insert(tools, tool)
+          end
+         end
+         for _,p in pairs(params[1]) do
+           local player = game.Players:FindFirstDescendant(p)
+           if player then
+            for _,o in pairs(params[2]) do
+              o:Clone().Parent = p
+            end
+          end
+         end
+        end
+     end
+   }
 }
 
 return module
