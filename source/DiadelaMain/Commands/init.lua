@@ -172,13 +172,27 @@ local module = {
        "give",
        "gib"
      }
-     function(params, _, level)
+     function(params, player, level)
       if level >= 10 then
         if params[1] == "all" then
           for _,p in pairs(game.Players:GetPlayers)
            for _,o in pairs(params[2]) do
-             o:Clone().Parent = p
+             local tool = game.ServerStorage:FindFirstDescendant(o)
+             if tool then
+              tool:Clone().Parent = p
+             end
+           end
+        elseif params[1] == 'others'
+          local players = game.Players:GetPlayers()
+          local admin = game.Players:FindFirstChild(player)
+          if admin then 
+            table.remove(players, admin)
           end
+          for _,p in pairs(players) do
+            for _,o in pairs(params) do
+              local tool = game.ServerStorage:FindFirstDescendant(o)
+               if tool then
+                 tool:Clone().Parent = p
         else
          local tools: table = {}
          for _,p in pairs(params[2]) do
